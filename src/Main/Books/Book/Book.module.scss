@@ -1,0 +1,42 @@
+.book_main {
+    background-color: rgb(255, 255, 255);
+    width: 420px;
+    height: 200px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 5px;
+    cursor: pointer;
+    align-items: center;
+    border:none;
+    &:hover {
+        transition: 2000ms;
+        box-shadow: 0px 1px 91px -38px rgba(34, 60, 80, 0.34);
+        z-index: 50px;
+        background-color: rgb(236, 246, 226);
+    }
+}
+.book_img {
+    padding: 5px;
+    max-height: 190px;
+    max-width: 150px;
+}
+.info {
+    width: 260px;
+    height: 100%;
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.author {
+    height: 50%;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.book_name {
+    padding: 10px 0 ;
+    height: 50%;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 700;
+}
