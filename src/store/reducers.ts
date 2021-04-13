@@ -12,7 +12,7 @@ const initialState = {
 export const getBooksReducer = (state: BooksState = initialState, action: Action) => {
     switch (action.type) {
         case 'GET_BOOKS':
-            return { ...state, books: action.payload } ;
+            return { ...state, books: action.payload };
         default:
             return state;
     }

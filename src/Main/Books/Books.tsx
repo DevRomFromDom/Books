@@ -7,7 +7,7 @@ import styles from './Books.module.scss';
 const Books = () => {
     const [books, setBooks] = useState<BooksState['books']>([]);
 
-    const newBooks = useSelector<BooksState, object[]>((state) => {
+    const newBooks = useSelector((state) => {
         return state.books;
     });
     useEffect(() => {
@@ -17,8 +17,8 @@ const Books = () => {
     return (
         <div className={styles.books_main}>
             {books.length !== 0
-                ? books.map((el:any , index: number) => {
-                      return <Book key = {index} value={el}/>;
+                ? books.map((el: any, index: number) => {
+                      return <Book key={index} value={el} />;
                   })
                 : null}
         </div>

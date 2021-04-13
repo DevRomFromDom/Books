@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import styles from './Search.module.scss';
 import SearchLogo from '../../icons/search.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { BooksState } from '../../store/reducers';
 
 interface BooksData {
     numFound: number;
@@ -28,6 +27,8 @@ const Search = () => {
         }
     };
 
+    const timerRef = useRef<ReturnType<typeof setTimeout> | any>();
+
     useEffect(() => {
         if (booksArr.length !== 0) {
             const getBooks = (booksArr: object[]) => {
@@ -36,7 +37,19 @@ const Search = () => {
             getBooks(booksArr);
         }
     }, [booksArr]);
+
+    useEffect(() => {
+        if (inputValue.length !== 0) {
+            timerRef.current = setTimeout(() => {
+                getArrOfBooks(inputValue);
+            }, 1000);
+
+            return () => clearInterval(timerRef.current);
+        }
+    }, [inputValue]);
+
     const dispatch = useDispatch();
+
     return (
         <div className={styles.search_main}>
             <div className={styles.logo}>Books</div>
