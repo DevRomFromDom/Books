@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import styles from './Search.module.scss';
 import SearchLogo from '../../icons/search.svg';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { ChangeLoaderContext } from '../Main';
 
 interface BooksData {
     numFound: number;
@@ -13,7 +14,10 @@ interface BooksData {
 const Search = () => {
     const [inputValue, setInputValue] = useState('');
     const [booksArr, setBooksArr] = useState<object[]>([]);
+
+    const contextLoader = useContext(ChangeLoaderContext);
     const getArrOfBooks = async (string: string) => {
+        contextLoader(true);
         try {
             let res = await fetch(`http://openlibrary.org/search.json?q=${string}`);
             if (!res.ok) {
@@ -26,7 +30,6 @@ const Search = () => {
             console.log(e);
         }
     };
-
     const timerRef = useRef<ReturnType<typeof setTimeout> | any>();
 
     useEffect(() => {
@@ -64,3 +67,6 @@ const Search = () => {
 };
 
 export default Search;
+function changeContentLoader() {
+    throw new Error('Function not implemented.');
+}
