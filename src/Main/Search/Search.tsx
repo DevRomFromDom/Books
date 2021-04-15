@@ -24,7 +24,7 @@ const Search = () => {
                 return cache.get(value);
             }
             try {
-                const res = await fetch(`http://openlibrary.org/search.json?q=${value.split(' ').join('+')}&limit=60`);
+                const res = await fetch(`https://openlibrary.org/search.json?q=${value.split(' ').join('+')}&limit=60`);
                 if (!res.ok) {
                     throw Error(`HTTP error! Status: ${res.status}`);
                 } else {

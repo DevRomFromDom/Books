@@ -21,11 +21,12 @@
 }
 .info {
     width: 260px;
-    height: 100%;
+    height: auto;
     display: flex;
     padding: 10px;
     flex-direction: column;
     justify-content: flex-start;
+    overflow: hidden;
 }
 .author {
     height: auto;
