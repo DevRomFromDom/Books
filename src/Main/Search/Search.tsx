@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import styles from './Search.module.scss';
 import SearchLogo from '../../icons/search.svg';
 import { useDispatch } from 'react-redux';
@@ -16,21 +16,38 @@ const Search = () => {
     const [booksArr, setBooksArr] = useState<object[]>([]);
 
     const contextLoader = useContext(ChangeLoaderContext);
-    const getArrOfBooks = async (string: string) => {
-        contextLoader(true);
-        try {
-            let res = await fetch(`http://openlibrary.org/search.json?q=${string}`);
-            if (!res.ok) {
-                throw Error(`HTTP error! Status: ${res.status}`);
-            } else {
-                let data: BooksData = await res.json();
-                await setBooksArr(data.docs);
+
+    const getBooksData = useMemo(() => {
+        const cache = new Map<string, BooksData>();
+        return async (value: string) => {
+            if (cache.has(value)) {
+                return cache.get(value);
             }
-        } catch (e) {
-            console.log(e);
+            try {
+                const res = await fetch(`http://openlibrary.org/search.json?q=${value}&limit=30`);
+                if (!res.ok) {
+                    throw Error(`HTTP error! Status: ${res.status}`);
+                } else {
+                    const data: BooksData = await res.json();
+                    cache.set(value, data);
+                    return data;
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        };
+    }, []);
+
+    const getArrOfBooks = async (value: string) => {
+        contextLoader(true);
+        const data = await getBooksData(value);
+        if (data) {
+            setBooksArr(data.docs);
         }
+        contextLoader(false);
     };
-    const timerRef = useRef<ReturnType<typeof setTimeout> | any>();
+
+    const timerRef = useRef<number>();
 
     useEffect(() => {
         if (booksArr.length !== 0) {
@@ -43,7 +60,7 @@ const Search = () => {
 
     useEffect(() => {
         if (inputValue.length !== 0) {
-            timerRef.current = setTimeout(() => {
+            timerRef.current = window.setTimeout(() => {
                 getArrOfBooks(inputValue);
             }, 1000);
 
@@ -57,7 +74,7 @@ const Search = () => {
         <div className={styles.search_main}>
             <div className={styles.logo}>Books</div>
             <div className={styles.search}>
-                <input className={styles.input} onChange={(e) => setInputValue(e.target.value)} value={inputValue} />
+                <input className={styles.input} onChange={(e) => setInputValue(e.target.value)} value={inputValue} placeholder={'Найти книгу'} type='text'/>
                 <button className={styles.button} onClick={() => getArrOfBooks(inputValue)}>
                     <img src={SearchLogo} className={styles.search_logo} />
                 </button>
@@ -67,6 +84,3 @@ const Search = () => {
 };
 
 export default Search;
-function changeContentLoader() {
-    throw new Error('Function not implemented.');
-}

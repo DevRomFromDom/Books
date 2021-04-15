@@ -22,25 +22,23 @@
     width: 1000px;
     max-height: 900px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     border-radius: 5px;
     padding-top: 10px;
-    align-items: flex-start;
+    align-items: center;
     border: solid rgb(221, 216, 216) 1px;
     z-index: 2;
     box-shadow: 0px 1px 91px -38px rgba(34, 60, 80, 0.34);
     overflow: auto;
-
 }
 .book_img {
-    padding: 20px;
+    padding: 20px 10px;
     height: 350px;
 }
 .close {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    position: absolute;
+    left: 94%;
+    top: 2%;
 }
 .button {
     background-color: red;
@@ -52,9 +50,9 @@
     border-radius: 100px;
     border: none;
     cursor: pointer;
-    &:hover{
-       box-shadow: 0px 0px 45px -10px rgba(172, 25, 25, 0.58);
-       border: solid red 0.1px;
+    &:hover {
+        box-shadow: 0px 0px 45px -10px rgba(172, 25, 25, 0.58);
+        border: solid red 0.1px;
     }
 }
 .icon {
@@ -62,13 +60,17 @@
     height: 40px;
 }
 .info {
+    padding: 20px 30px 10px 0;
     width: 800px;
     height: 95%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
 }
-.author,.isbn,.firm,.date {
+.author,
+.isbn,
+.firm,
+.date {
     padding: 15px 0;
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
@@ -77,4 +79,68 @@
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
     font-weight: 700;
+}
+
+@media screen and (min-device-width: 961px) and (max-device-width: 1140px) {
+    .book_main {
+        width: auto;
+        max-width: 1000px;
+        min-width: 950px;
+    }
+    .info {
+        width: auto;
+    }
+}
+@media screen and (min-device-width: 721px) and (max-device-width: 960px) {
+    .book_main {
+        width: 90%;
+        max-width: 950px;
+        min-width: 720px;
+    }
+    .info {
+        width: auto;
+    }
+    .close {
+        left: 92%;
+        top: 2%;
+    }
+}
+@media screen and (min-device-width: 541px) and (max-device-width: 720px) {
+    .book_main {
+        width: 90%;
+        max-width: 710px;
+        min-width: 540px;
+    }
+    .info {
+        width: auto;
+       
+    }
+    .book_img {
+        width: 200px;
+        height: auto;
+    }
+    .close {
+        left: 90%;
+        top: 2%;
+    }
+}
+@media screen and (max-device-width: 540px) {
+    .book_main {
+        width: 90%;
+        max-width: 520px;
+        flex-direction: column;
+    }
+    .info {
+        width: auto;
+        padding: 10px
+       
+    }
+    .book_img {
+        width: 200px;
+        height: auto;
+    }
+    .close {
+        left: 80%;
+        top: 2%;
+    }
 }

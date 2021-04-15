@@ -1,5 +1,29 @@
-.main{
-    width: 1320px;
+.main {
+    max-width: 1320px;
     margin: auto;
     height: auto;
+}
+@media screen and (min-device-width: 961px) and (max-device-width: 1140px) {
+    .main {
+        width: auto;
+        max-width: 1140px;
+    }
+}
+@media screen and (min-device-width: 721px) and (max-device-width: 960px) {
+    .main {
+        width: auto;
+        max-width: 960px;
+    }
+}
+@media screen and (min-device-width: 541px) and (max-device-width: 720px) {
+    .main {
+        width: auto;
+        max-width: 719px;
+    }
+}
+@media screen and (max-device-width: 540px) {
+    .main {
+        width: auto;
+        max-width: 540px;
+    }
 }
