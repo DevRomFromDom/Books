@@ -10,7 +10,6 @@ const Books = () => {
     const [books, setBooks] = useState<BooksState['books']>([]);
     const contextLoader = useContext<boolean>(LoaderContext);
     const changeLoader = useContext(ChangeLoaderContext);
-    console.log(contextLoader);
     const newBooks = useSelector((state) => {
         return state.books;
     });

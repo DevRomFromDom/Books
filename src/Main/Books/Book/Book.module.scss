@@ -50,7 +50,9 @@
     }
 }
 @media screen and (min-device-width: 541px) and (max-device-width: 720px) {
-    .info,
+    .info {
+        height: 140px;
+    }
     .author,
     .book_name,
     .book_main,
@@ -64,15 +66,16 @@
         max-height: 150px;
     }
     .book_img {
-        max-width: 100px;
+        max-width: 120px;
     }
 }
 @media screen and (max-device-width: 540px) {
-   .info,
+    .info {
+        height: 190px;
+    }
     .author,
     .book_name,
-    .book_main,
-    .book_img {
+    .book_main {
         width: auto;
         height: auto;
         font-size: 20px;
@@ -82,7 +85,7 @@
         max-height: 190px;
     }
     .book_img {
-        max-width: 100px;
-        max-width: max-content;
+        height: auto;
+        max-width: 135px;
     }
 }

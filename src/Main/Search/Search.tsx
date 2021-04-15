@@ -24,7 +24,7 @@ const Search = () => {
                 return cache.get(value);
             }
             try {
-                const res = await fetch(`http://openlibrary.org/search.json?q=${value}&limit=30`);
+                const res = await fetch(`http://openlibrary.org/search.json?q=${value.split(' ').join('+')}&limit=60`);
                 if (!res.ok) {
                     throw Error(`HTTP error! Status: ${res.status}`);
                 } else {
@@ -33,7 +33,7 @@ const Search = () => {
                     return data;
                 }
             } catch (e) {
-                console.log(e);
+                throw Error(`Error : ${e}`);
             }
         };
     }, []);
@@ -74,7 +74,13 @@ const Search = () => {
         <div className={styles.search_main}>
             <div className={styles.logo}>Books</div>
             <div className={styles.search}>
-                <input className={styles.input} onChange={(e) => setInputValue(e.target.value)} value={inputValue} placeholder={'Найти книгу'} type='text'/>
+                <input
+                    className={styles.input}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    value={inputValue}
+                    placeholder={'Найти книгу'}
+                    type="text"
+                />
                 <button className={styles.button} onClick={() => getArrOfBooks(inputValue)}>
                     <img src={SearchLogo} className={styles.search_logo} />
                 </button>

@@ -1,13 +1,18 @@
 .search_main {
+    position: fixed;
+    top: 0;
     background-color: rgb(235, 241, 235);
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
-    height: 100px;
+    height: 70px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 30px;
     border-bottom: solid rgb(231, 229, 229) 1px;
+    width: 100%;
+    max-width: 1320px;
+    z-index: 1;
 }
 .search {
     margin: 10px;
